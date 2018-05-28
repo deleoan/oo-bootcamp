@@ -1,0 +1,29 @@
+Requirement1:
+3 Mile == 3 Mile
+3 Mile != 2 Mile
+3 Mile != 4 Mile
+1 Mile != null
+null != 1 Mile
+
+
+Requirement2:
+1 mile == 1760 yard
+3yard == 3 yard
+1mile != 1761 yard
+3 yard!= 4 yard
+1 yard != null
+Null != 1 yard
+
+Requirement3:
+1 Yard == 3 Feet
+1 Feet == 12 Inch
+1 Mile = 5280 Feet
+1 Mile = 63360 Inch
+1 Yard != 4 Feet
+1 Feet != 13 Inch
+1 Mile != 5281 Feet
+1 Mile != 63361 Inch
+1 Feet != null
+Null != 1 feet
+1 inch != null
+Null != 1 inch
