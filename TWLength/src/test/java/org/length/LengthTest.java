@@ -31,7 +31,8 @@ public class LengthTest {
 
     @Test
     public void test_null_not_equal_1_mile() {
-        Assert.assertNotEquals(null, new Mile(1));
+        Mile mile = new Mile(1);
+        Assert.assertNotEquals(null, mile);
     }
 
     @Test
@@ -65,8 +66,80 @@ public class LengthTest {
     }
 
     @Test
-    public void test_null_not_equal_1_yard() {
+    public void test_null_not_equal_to_1_yard() {
         Yard yard = new Yard(1);
         Assert.assertNotEquals(null, yard);
+    }
+
+    @Test
+    public void test_1_yard_equal_to_3_feet() {
+        Yard yard = new Yard(1);
+        Assert.assertEquals(yard, new Feet(3));
+    }
+
+    @Test
+    public void test_1_feet_equal_to_12_inch() {
+        Feet feet = new Feet(1);
+        Assert.assertEquals(feet, new Inch(12));
+    }
+
+    @Test
+    public void test_1_mile_equal_to_5280_feet() {
+        Mile mile = new Mile(1);
+        Assert.assertEquals(mile, new Feet(5280));
+    }
+
+    @Test
+    public void test_1_mile_equal_to_63360_inch() {
+        Mile mile = new Mile(1);
+        Assert.assertEquals(mile, new Inch(63360));
+    }
+
+    @Test
+    public void test_1_yard_not_equal_to_4_feet() {
+        Yard yard = new Yard(1);
+        Assert.assertNotEquals(yard, new Feet(4));
+    }
+
+    @Test
+    public void test_1_feet_not_equal_to_13_inch() {
+        Feet feet = new Feet(1);
+        Assert.assertNotEquals(feet, new Inch(13));
+    }
+
+    @Test
+    public void test_1_mile_not_equal_to_5281_feet() {
+        Mile mile = new Mile(1);
+        Assert.assertNotEquals(mile, new Feet(5281));
+    }
+
+    @Test
+    public void test_1_mile_not_equal_to_63361_inch() {
+        Mile mile = new Mile(1);
+        Assert.assertNotEquals(mile, new Inch(63361));
+    }
+
+    @Test
+    public void test_1_feet_not_equal_to_null() {
+        Feet feet = new Feet(1);
+        Assert.assertNotEquals(feet, null);
+    }
+
+    @Test
+    public void test_null_not_equal_to_1_feet() {
+        Feet feet = new Feet(1);
+        Assert.assertNotEquals(null, feet);
+    }
+
+    @Test
+    public void test_1_inch_not_equal_to_null() {
+        Inch inch = new Inch(1);
+        Assert.assertNotEquals(inch, null);
+    }
+
+    @Test
+    public void test_null_not_equal_to_1_inch() {
+        Inch inch = new Inch(1);
+        Assert.assertNotEquals(null, inch);
     }
 }
