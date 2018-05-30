@@ -27,3 +27,11 @@ Requirement3:
 Null != 1 feet
 1 inch != null
 Null != 1 inch
+3 Feet = 1 Yard
+12 Inch = 1 Feet
+5280 Feet = 1 Mile
+63360 Inch = 1 Mile
+4 Feet != 1 Yard
+13 Inch != 1 Feet
+5281 Feet != 1 Mile
+63361 != 1 Mile

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86b9e1e1-dc43-4e1b-a1fe-f436d53db534" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/length/Feet.java" afterPath="$PROJECT_DIR$/src/main/java/org/length/Feet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/length/Mile.java" afterPath="$PROJECT_DIR$/src/main/java/org/length/Mile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/length/Yard.java" afterPath="$PROJECT_DIR$/src/main/java/org/length/Yard.java" />
-    </list>
+    <list default="true" id="86b9e1e1-dc43-4e1b-a1fe-f436d53db534" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,7 +12,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LengthTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LengthTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/length/LengthTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -87,7 +83,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mile.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Mile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/length/Mile.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -134,7 +130,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="960" />
     <option name="width" value="960" />
     <option name="height" value="956" />
@@ -495,6 +491,9 @@
     <history-entry file="LengthTest - 2018.05.30 at 19h 03m 05s.xml">
       <configuration name="LengthTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="LengthTest - 2018.05.30 at 19h 09m 35s.xml">
+      <configuration name="LengthTest" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="LengthTest_test_12_inch_equal_to_1_feet - 2018.05.30 at 18h 13m 53s.xml">
       <configuration name="LengthTest.test_12_inch_equal_to_1_feet" configurationId="JUnit" />
     </history-entry>
@@ -503,9 +502,6 @@
     </history-entry>
     <history-entry file="LengthTest_test_13_inch_not_equal_to_1_feet - 2018.05.30 at 18h 31m 27s.xml">
       <configuration name="LengthTest.test_13_inch_not_equal_to_1_feet" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LengthTest_test_3_feet_equal_to_1_yard - 2018.05.30 at 18h 10m 02s.xml">
-      <configuration name="LengthTest.test_3_feet_equal_to_1_yard" configurationId="JUnit" />
     </history-entry>
     <history-entry file="LengthTest_test_4_feet_equal_to_1_yard - 2018.05.30 at 18h 25m 41s.xml">
       <configuration name="LengthTest.test_4_feet_equal_to_1_yard" configurationId="JUnit" />
@@ -524,7 +520,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="972" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="972" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -535,7 +531,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20595238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20595238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -703,16 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/length/LengthTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.12.jar!/org/junit/Assert.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -744,6 +730,16 @@
             <element signature="e#119#120#0" expanded="true" />
             <element signature="e#141#142#0" expanded="true" />
             <element signature="e#169#170#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/length/LengthTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
