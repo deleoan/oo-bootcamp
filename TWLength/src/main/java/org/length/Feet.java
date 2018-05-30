@@ -13,13 +13,13 @@ public class Feet {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj != null && obj.getClass() == Inch.class) {
+        if (obj != null && obj instanceof Inch) {
             return this.value == (((Inch) obj).getValue() / 12.0);
         } else if (obj != null && obj instanceof Yard){
             return this.value == (((Yard) obj).getValue() * 3.0);
         } else if (obj != null && obj instanceof Mile){
             return this.value == (((Mile) obj).getValue() * 5280.0);
         }
-        return obj != null && obj.getClass() == Feet.class && this.value == ((Feet) obj).value;
+        return obj != null && obj instanceof Feet && this.value == ((Feet) obj).value;
     }
 }
