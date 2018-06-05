@@ -1,12 +1,14 @@
 package org.length;
 
-class Yard extends Length{
+class Yard implements Length{
+    private int value;
+
     Yard(int value) {
-        super(value);
+        this.value = value;
     }
 
     @Override
-    double getBaseValue() {
+    public double getBaseValue() {
         return value * 36;
     }
 }

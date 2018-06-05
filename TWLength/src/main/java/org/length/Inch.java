@@ -1,13 +1,14 @@
 package org.length;
 
-class Inch extends Length {
+class Inch implements Length {
+    private int value;
 
     Inch(int value) {
-        super(value);
+        this.value = value;
     }
 
     @Override
-    double getBaseValue() {
+    public double getBaseValue() {
         return value;
     }
 }

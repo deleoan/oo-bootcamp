@@ -1,6 +1,6 @@
 package org.length;
 
-public abstract class Length {
+/*public abstract class Length {
     int value;
 
     Length(int value) {
@@ -11,12 +11,14 @@ public abstract class Length {
         return value;
     }
 
-//    abstract Length createUnit(String unit, int value);
-
-     abstract double getBaseValue();
+    abstract double getBaseValue();
 
     @Override
     public boolean equals(Object obj) {
         return obj != null && this.getBaseValue() == ((Length) obj).getBaseValue();
     }
+}*/
+
+public interface Length {
+    double getBaseValue();
 }

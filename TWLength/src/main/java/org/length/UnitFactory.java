@@ -1,4 +1,4 @@
-//package org.length;
+package org.length;
 //
 //public class UnitFactory extends Length {
 //
@@ -18,3 +18,10 @@
 //        return 0;
 //    }
 //}
+
+public class UnitFactory {
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && this.getBaseValue() == ((Length) obj).getBaseValue();
+    }
+}

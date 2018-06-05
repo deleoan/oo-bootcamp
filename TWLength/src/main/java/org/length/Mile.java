@@ -1,12 +1,15 @@
 package org.length;
 
-class Mile extends Length{
+class Mile implements Length{
+    private int value;
+
     Mile(int value) {
-        super(value);
+        this.value = value;
     }
 
+
     @Override
-    double getBaseValue() {
+    public double getBaseValue() {
         return value * 63360;
     }
 }

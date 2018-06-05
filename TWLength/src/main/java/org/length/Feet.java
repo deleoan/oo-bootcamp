@@ -1,12 +1,14 @@
 package org.length;
 
-class Feet extends Length{
+class Feet implements Length{
+    private int value;
+
     Feet(int value) {
-        super(value);
+        this.value = value;
     }
 
     @Override
-    double getBaseValue() {
+    public double getBaseValue() {
         return value * 12;
     }
 }
