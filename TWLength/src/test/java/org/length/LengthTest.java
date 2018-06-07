@@ -190,4 +190,18 @@ public class LengthTest {
         Inch inch = new Inch(63361);
         Assert.assertNotEquals(inch, new Mile(1));
     }
+
+    @Test
+    public void test_13_inch_add_to_11_inch_equal_to_2_feet() {
+        Inch inch = new Inch(11);
+        inch.add(new Inch(13));
+        Assert.assertEquals(inch, new Feet(2));
+    }
+
+    @Test
+    public void test_3_feet_add_to_3_yard_equal_to_4_yard() {
+        Yard yard = new Yard(3);
+        yard.add(new Feet(3));
+        Assert.assertEquals(yard, new Yard(4));
+    }
 }

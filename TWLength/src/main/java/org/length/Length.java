@@ -1,13 +1,20 @@
 package org.length;
 
 public abstract class Length {
-    int value;
+    private int value;
+    int multiplier;
 
     Length(int value) {
         this.value = value;
     }
 
-    abstract double getBaseValue();
+    private double getBaseValue() {
+        return value * multiplier;
+    }
+
+    public void add(Length length) {
+        this.value += (length.getBaseValue() / this.multiplier);
+    }
 
     @Override
     public boolean equals(Object obj) {
