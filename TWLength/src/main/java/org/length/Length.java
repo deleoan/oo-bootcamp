@@ -1,6 +1,6 @@
 package org.length;
 
-public abstract class Length {
+public abstract class Length extends Object {
     int value;
 
     Length(int value) {
@@ -12,6 +12,11 @@ public abstract class Length {
     @Override
     public boolean equals(Object obj) {
         return obj != null && this.getBaseValue() == ((Length) obj).getBaseValue();
+    }
+
+
+    double add(Length length) {
+        return this.getBaseValue() + length.getBaseValue();
     }
 
     enum Value {

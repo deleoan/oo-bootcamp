@@ -3,6 +3,8 @@ package org.length;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
+
 public class LengthTest {
 
     @Test
@@ -189,5 +191,15 @@ public class LengthTest {
     public void test_63361_inch_not_equal_to_1_Mile() {
         Inch inch = new Inch(63361);
         Assert.assertNotEquals(inch, new Mile(1));
+    }
+
+    @Test
+    public void test_add_13_inch_to_11_inch_equals_2_feet() {
+        assertEquals(new Inch(11).add(new Inch(13)), (new Feet(2).getBaseValue()));
+    }
+
+    @Test
+    public void test_add_3_feet_to_2_yard_equals_3_yard() {
+        assertEquals(new Feet(3).add(new Yard(2)), (new Yard(3).getBaseValue()));
     }
 }
