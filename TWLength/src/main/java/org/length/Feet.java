@@ -7,6 +7,6 @@ class Feet extends Length{
 
     @Override
     double getBaseValue() {
-        return value * 12;
+        return value * Value.Feet.getValue();
     }
 }

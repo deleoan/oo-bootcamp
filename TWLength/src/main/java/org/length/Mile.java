@@ -7,6 +7,6 @@ class Mile extends Length{
 
     @Override
     double getBaseValue() {
-        return value * 63360;
+        return value * Value.Mile.getValue();
     }
 }

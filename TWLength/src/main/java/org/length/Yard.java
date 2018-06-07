@@ -7,6 +7,6 @@ class Yard extends Length{
 
     @Override
     double getBaseValue() {
-        return value * 36;
+        return value * Value.Yard.getValue();
     }
 }
