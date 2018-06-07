@@ -7,7 +7,6 @@ class Mile implements Length{
         this.value = value;
     }
 
-
     @Override
     public double getBaseValue() {
         return value * 63360;

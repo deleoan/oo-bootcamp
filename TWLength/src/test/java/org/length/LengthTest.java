@@ -8,6 +8,9 @@ public class LengthTest {
     @Test
     public void test_3_mile_equal_to_3_mile() {
         UnitFactory unitFactory = new UnitFactory();
+        Mile mile = new Mile(3);
+        boolean isLengthEquals = unitFactory.isEquals(mile, new Mile(3));
+        Assert.assertTrue(isLengthEquals);
 //        Mile mile = new Mile(3);
 //        Assert.assertEquals(mile, new Mile(3));
     }

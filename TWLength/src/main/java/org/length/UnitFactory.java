@@ -20,8 +20,15 @@ package org.length;
 //}
 
 public class UnitFactory {
-    @Override
-    public boolean equals(Object obj) {
-        return obj != null && this.getBaseValue() == ((Length) obj).getBaseValue();
+    public boolean isEquals(Object expected, Object actual) {
+        if (expected instanceof Mile) {
+            return expected.equals(actual);
+        }
+        return false;
     }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        return obj != null && this.getBaseValue() == ((Length) obj).getBaseValue();
+//    }
 }
