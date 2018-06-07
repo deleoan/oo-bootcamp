@@ -20,9 +20,9 @@ package org.length;
 //}
 
 public class UnitFactory {
-    public boolean isEquals(Object expected, Object actual) {
+    public boolean isEqual(Length expected, Length actual) {
         if (expected instanceof Mile) {
-            return expected.equals(actual);
+            return actual != null && expected.getBaseValue() == actual.getBaseValue();
         }
         return false;
     }
