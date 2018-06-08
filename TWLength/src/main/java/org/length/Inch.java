@@ -4,6 +4,6 @@ class Inch extends Length {
 
     Inch(int value) {
         super(value);
-        this.multiplier = 1;
+        this.multiplier = Value.Inch.getValue();
     }
 }

@@ -12,7 +12,7 @@ public class LengthTest {
     }
 
     @Test
-    public void  test_3_mile_not_equal_to_2_mile() {
+    public void test_3_mile_not_equal_to_2_mile() {
         Mile mile = new Mile(3);
         Assert.assertNotEquals(mile, new Mile(2));
     }
