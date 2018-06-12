@@ -4,31 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ParkingLot {
-    private int maximumSlot;
+    private int availableSlot;
     private List<Car> cars = new ArrayList<>();
 
-    ParkingLot(int maximumSlot) {
-        this.maximumSlot = maximumSlot;
+    ParkingLot(int availableSlot) {
+        this.availableSlot = availableSlot;
     }
 
-    Ticket addCarAndCheckSlot(Car car) {
-        if(this.maximumSlot > 0 && car != null){
-            addCar(car);
+    Ticket checkSlotAndParkCar(Car car) {
+        if(this.availableSlot > 0 && car != null){
+            parkCar(car);
             return car.getTicket();
         }
         return null;
     }
 
-    private void addCar(Car car) {
-        this.maximumSlot -= 1;
+    private void parkCar(Car car) {
+        this.availableSlot -= 1;
         cars.add(car);
+//        Ticket ticket = new Ticket();
         car.setTicket(new Ticket());
     }
 
     Car releaseCar(Ticket ticket) {
         for(Car car : this.cars){
-            if(car.getTicket()==ticket){
-                this.maximumSlot+=1;
+            if(car.getTicket() == ticket){
+                this.availableSlot+=1;
                 return car;
             }
         }
