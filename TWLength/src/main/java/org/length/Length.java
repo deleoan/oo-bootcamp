@@ -1,10 +1,10 @@
 package org.length;
 
 public abstract class Length {
-    private int value;
+    private double value;
     int multiplier;
 
-    Length(int value) {
+    Length(double value) {
         this.value = value;
     }
 

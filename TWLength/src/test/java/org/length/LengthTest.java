@@ -1,6 +1,7 @@
 package org.length;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class LengthTest {
@@ -203,5 +204,11 @@ public class LengthTest {
         Yard yard = new Yard(3);
         yard.add(new Feet(3));
         Assert.assertEquals(yard, new Yard(4));
+    }
+
+    @Test
+    public void test_1_yard_add_to_12_inch_equal_to_4_feet() {
+        new Yard(1).add(new Inch(12));
+        Assert.assertEquals(new Yard(1), new Feet(4));
     }
 }
