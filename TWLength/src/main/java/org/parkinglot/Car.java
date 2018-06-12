@@ -3,11 +3,11 @@ package org.parkinglot;
 class Car {
     private Ticket ticket;
 
-    Ticket getTicket() {
+    Ticket getCarTicket() {
         return ticket;
     }
 
-    void setTicket(Ticket ticket) {
+    void setCarTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 }

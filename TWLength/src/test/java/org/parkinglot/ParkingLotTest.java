@@ -9,6 +9,7 @@ public class ParkingLotTest {
     public void park_car_to_available_slot() {
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(1);
+
         Assert.assertNotNull(parkingLot.checkSlotAndParkCar(car));
     }
 
@@ -16,6 +17,7 @@ public class ParkingLotTest {
     public void parking_lot_is_full(){
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(0);
+
         Assert.assertNull(parkingLot.checkSlotAndParkCar(car));
     }
 
@@ -25,19 +27,21 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLot.checkSlotAndParkCar(car);
 
-        Assert.assertNotNull(parkingLot.releaseCar(car.getTicket()));
+        Assert.assertNotNull(parkingLot.releaseCar(new Ticket(1001)));
     }
 
     @Test
     public void should_not_return_parked_car_no_ticket(){
         ParkingLot parkingLot = new ParkingLot(1);
+
         Assert.assertNull(parkingLot.releaseCar(null));
     }
 
     @Test
     public void no_car_but_with_ticket(){
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(0001);
         ParkingLot parkingLot = new ParkingLot(1);
+
         Assert.assertNull(parkingLot.releaseCar(ticket));
     }
 
@@ -46,9 +50,11 @@ public class ParkingLotTest {
         Car car = new Car();
         ParkingLot parkingLotA = new ParkingLot(0);
         Ticket parkingTicket = parkingLotA.checkSlotAndParkCar(car);
+
         if (parkingTicket == null) {
             ParkingLot parkingLotB = new ParkingLot(1);
             parkingTicket = parkingLotB.checkSlotAndParkCar(car);
+
             Assert.assertNotNull(parkingTicket);
         }
     }
@@ -58,12 +64,14 @@ public class ParkingLotTest {
         Car car = new Car();
         ParkingLot parkingLotA = new ParkingLot(0);
         Ticket parkingTicket = parkingLotA.checkSlotAndParkCar(car);
+
         if (parkingTicket == null) {
             ParkingLot parkingLotB = new ParkingLot(0);
             parkingTicket = parkingLotB.checkSlotAndParkCar(car);
             if (parkingTicket == null) {
                 ParkingLot parkingLotC = new ParkingLot(1);
                 parkingTicket = parkingLotC.checkSlotAndParkCar(car);
+
                 Assert.assertNotNull(parkingTicket);
             }
         }
@@ -71,14 +79,15 @@ public class ParkingLotTest {
 
     @Test
     public void cannot_see_car_in_lot_A_pickup_in_lot_B() {
-        Car car = new Car();
+        Ticket parkingTicket = new Ticket(1001);
         ParkingLot parkingLotA = new ParkingLot(0);
         ParkingLot parkingLotB = new ParkingLot(1);
-        parkingLotB.checkSlotAndParkCar(car);
+        parkingLotB.checkSlotAndParkCar(new Car());
 
-        Car releasedCar = parkingLotA.releaseCar(car.getTicket());
+        Car releasedCar = parkingLotA.releaseCar(parkingTicket);
         if(releasedCar == null) {
-            releasedCar = parkingLotB.releaseCar(car.getTicket());
+            releasedCar = parkingLotB.releaseCar(parkingTicket);
+
             Assert.assertNotNull(releasedCar);
         }
     }

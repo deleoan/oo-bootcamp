@@ -12,24 +12,29 @@ class ParkingLot {
     }
 
     Ticket checkSlotAndParkCar(Car car) {
-        if(this.availableSlot > 0 && car != null){
+        if(checkSlotAvailability() && car != null){
             parkCar(car);
-            return car.getTicket();
+            return car.getCarTicket();
         }
         return null;
+    }
+
+    private boolean checkSlotAvailability() {
+        return this.availableSlot > 0;
     }
 
     private void parkCar(Car car) {
         this.availableSlot -= 1;
         cars.add(car);
-//        Ticket ticket = new Ticket();
-        car.setTicket(new Ticket());
+        int ticketNumber = 1001;
+        Ticket ticket = new Ticket(ticketNumber);
+        car.setCarTicket(ticket.getTicket());
     }
 
     Car releaseCar(Ticket ticket) {
         for(Car car : this.cars){
-            if(car.getTicket() == ticket){
-                this.availableSlot+=1;
+            if(car.getCarTicket().ticketNumber == ticket.ticketNumber){
+                this.availableSlot += 1;
                 return car;
             }
         }

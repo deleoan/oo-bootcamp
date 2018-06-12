@@ -1,8 +1,14 @@
 package org.parkinglot;
 
-public class Ticket {
+class Ticket {
 
-//    public Ticket getTicket() {
-//        return new Ticket();
-//    }
+    int ticketNumber;
+
+    Ticket(int ticketNumber) {
+        this.ticketNumber = ticketNumber;
+    }
+
+    Ticket getTicket() {
+        return new Ticket(ticketNumber);
+    }
 }
