@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingLotTest {
-    Manager manager;
-    ParkingLot parkingLotA, parkingLotB, parkingLotC;
+    private Manager manager;
+    private ParkingLot parkingLotA, parkingLotB, parkingLotC;
 
     @Before
     public void setUpTest(){
@@ -60,7 +60,6 @@ public class ParkingLotTest {
         parkingLotB = new ParkingLot(5);
         parkingLotC = new ParkingLot(5);
 
-        manager = new Manager();
         manager.getParkingLots().add(parkingLotA);
         manager.getParkingLots().add(parkingLotB);
 
@@ -68,8 +67,8 @@ public class ParkingLotTest {
         manager.parkCar(car);
 
         Assert.assertTrue(parkingLotA.hasCar(car.getTicket()));
-        Assert.assertTrue(!parkingLotB.hasCar(car.getTicket()));
-        Assert.assertTrue(!parkingLotC.hasCar(car.getTicket()));
+        Assert.assertFalse(parkingLotB.hasCar(car.getTicket()));
+        Assert.assertFalse(parkingLotC.hasCar(car.getTicket()));
     }
 
     @Test
@@ -84,9 +83,9 @@ public class ParkingLotTest {
         Car car = new Car();
         manager.parkCar(car);
 
-        Assert.assertTrue(!parkingLotA.hasCar(car.getTicket()));
+        Assert.assertFalse(parkingLotA.hasCar(car.getTicket()));
         Assert.assertTrue(parkingLotB.hasCar(car.getTicket()));
-        Assert.assertTrue(!parkingLotC.hasCar(car.getTicket()));
+        Assert.assertFalse(parkingLotC.hasCar(car.getTicket()));
     }
 
     @Test(expected = FullParkingException.class)
@@ -104,9 +103,6 @@ public class ParkingLotTest {
     @Test
     public void manager_releases_car() throws CarNotFoundException, FullParkingException{
         parkingLotA = new ParkingLot(5);
-        parkingLotB = new ParkingLot(5);
-
-        manager.getParkingLots().add(parkingLotA);
         manager.getParkingLots().add(parkingLotA);
 
         Car car = new Car();
@@ -119,7 +115,7 @@ public class ParkingLotTest {
     public void manager_parks_multiple_cars_and_parking_lots_available() throws FullParkingException{
         List<Car> cars = new ArrayList<>();
         cars.add(new Car());
-        cars.add( new Car());
+        cars.add(new Car());
         cars.add(new Car());
 
         parkingLotA = new ParkingLot(2);
@@ -135,14 +131,9 @@ public class ParkingLotTest {
     public void manager_parks_multiple_cars_and_not_enough_space() throws FullParkingException{
 
         List<Car> cars = new ArrayList<>();
-
-        Car carA = new Car();
-        Car carB = new Car();
-        Car carC = new Car();
-
-        cars.add(carA);
-        cars.add(carB);
-        cars.add(carC);
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
 
         parkingLotA = new ParkingLot(2);
         parkingLotB = new ParkingLot(0);
