@@ -1,66 +1,63 @@
 package org.parkinglot;
 
+import org.exceptions.CarNotFoundException;
+import org.exceptions.FullParkingException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class ParkingLot {
-    private List<Car> parkingLotA = new ArrayList<>();
-    private List<Car> parkingLotB = new ArrayList<>();
-    private List<Car> parkingLotC = new ArrayList<>();
+    int maximumSlots;
 
-    Ticket checkSlotAndParkCar(Car car) {
-        if (car != null) {
-            if (hasAvailableSlot(parkingLotA)) {
-                parkCar(car, parkingLotA);
-                return car.getCarTicket();
-            } else if (hasAvailableSlot(parkingLotB)) {
-                parkCar(car, parkingLotB);
-                return car.getCarTicket();
-            } else if (hasAvailableSlot(parkingLotC)){
-                parkCar(car, parkingLotC);
-                return car.getCarTicket();
-            } else {
-                return null;
-            }
+    List<Car> cars = new ArrayList<>();
+
+    public ParkingLot(int maximumSlots){
+        this.maximumSlots = maximumSlots;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    Ticket checkSlotAndParkCar(Car car) throws FullParkingException {
+        if (!isFull() && car != null) {
+            parkCar(car);
+            return car.getTicket();
         }
-        return null;
+        throw new FullParkingException();
     }
 
-    private boolean hasAvailableSlot(List<Car> parkingLot) {
-        int parkingAvailableSlot = 1;
-        return parkingLot.size() < parkingAvailableSlot;
+    private void parkCar(Car car) {
+        Ticket ticket = new Ticket();
+        car.setTicket(ticket);
+        getCars().add(car);
+        this.maximumSlots-=1;
     }
 
-    private void parkCar(Car car, List<Car> parkingLot) {
-        parkingLot.add(car);
-        int ticketNumber = 1001;
-        Ticket ticket = new Ticket(ticketNumber);
-        car.setCarTicket(ticket.getTicket());
-    }
-
-    Car releaseCar(Ticket ticket, String parkingLot) {
-        List<Car> parking = getParkingLot(parkingLot);
-        assert parking != null;
-        for(Car car : parking){
-            if(car.getCarTicket().ticketNumber == ticket.ticketNumber){
-                parking.remove(0);
+    Car releaseCar(Ticket ticket) throws CarNotFoundException {
+        for(Car car: this.cars){
+            if(car.getTicket().equals(ticket)){
+                this.maximumSlots+=1;
+                cars.remove(car);
                 return car;
             }
         }
-        return null;
+        throw new CarNotFoundException();
     }
 
-    private List<Car> getParkingLot(String parkingLot) {
-        if (!parkingLot.isEmpty()) {
-            switch (parkingLot) {
-                case "parkingLotA":
-                    return new ArrayList<>(parkingLotA);
-                case "parkingLotB":
-                    return new ArrayList<>(parkingLotB);
-                case "parkingLotC":
-                    return new ArrayList<>(parkingLotC);
+    public boolean hasCar(Ticket ticket){
+        for(Car parkedCar : getCars()){
+            if(parkedCar.getTicket().equals(ticket)){
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    public boolean isFull() {
+        if(this.maximumSlots==0){
+            return true;
+        }
+        return false;
     }
 }
