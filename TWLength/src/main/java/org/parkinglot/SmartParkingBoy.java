@@ -13,31 +13,6 @@ class SmartParkingBoy {
     }
 
     void parkCars(List<Car> cars) throws FullParkingException {
-        ParkingLot parkingLotA = getParkingLots().get(0);
-        ParkingLot parkingLotB = getParkingLots().get(1);
-        int parkingLotASlot = parkingLotA.maximumSlots;
-        int parkingLotBSlot = parkingLotB.maximumSlots;
-
-        if (parkingLotASlot == 0 && parkingLotBSlot == 0) {
-            throw new FullParkingException();
-        } else {
-            if (parkingLotASlot == parkingLotBSlot) {
-                for(Car car : cars){
-                    parkCar(car, parkingLotA);
-                }
-            } else {
-                if (parkingLotASlot > parkingLotBSlot) {
-                    for(Car car : cars){
-                        parkCar(car, parkingLotA);
-                    }
-                } else {
-                    for(Car car : cars){
-                        parkCar(car, parkingLotB);
-                    }
-                }
-            }
-
-        }
 
     }
 
