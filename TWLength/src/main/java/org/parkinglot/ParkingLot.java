@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ParkingLot {
-    private int maximumSlots;
+    int maximumSlots;
 
-    private List<Car> cars = new ArrayList<>();
+    List<Car> cars = new ArrayList<>();
 
-    ParkingLot(int maximumSlots){
+    public ParkingLot(int maximumSlots){
         this.maximumSlots = maximumSlots;
     }
 
-    List<Car> getCars() {
+    public List<Car> getCars() {
         return cars;
     }
 
@@ -45,7 +45,7 @@ class ParkingLot {
         throw new CarNotFoundException();
     }
 
-    boolean hasCar(Ticket ticket){
+    public boolean hasCar(Ticket ticket){
         for(Car parkedCar : getCars()){
             if(parkedCar.getTicket().equals(ticket)){
                 return true;
@@ -54,7 +54,10 @@ class ParkingLot {
         return false;
     }
 
-    boolean isFull() {
-        return this.maximumSlots == 0;
+    public boolean isFull() {
+        if(this.maximumSlots==0){
+            return true;
+        }
+        return false;
     }
 }

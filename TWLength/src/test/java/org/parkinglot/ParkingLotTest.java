@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingLotTest {
-    private Manager manager;
-    private ParkingLot parkingLotA, parkingLotB, parkingLotC;
+    ParkingBoy parkingBoy;
+    ParkingLot parkingLotA, parkingLotB, parkingLotC;
 
     @Before
     public void setUpTest(){
-        manager = new Manager();
+        parkingBoy = new ParkingBoy();
     }
 
 
@@ -60,15 +60,16 @@ public class ParkingLotTest {
         parkingLotB = new ParkingLot(5);
         parkingLotC = new ParkingLot(5);
 
-        manager.getParkingLots().add(parkingLotA);
-        manager.getParkingLots().add(parkingLotB);
+        parkingBoy = new ParkingBoy();
+        parkingBoy.getParkingLots().add(parkingLotA);
+        parkingBoy.getParkingLots().add(parkingLotB);
 
         Car car = new Car();
-        manager.parkCar(car);
+        parkingBoy.parkCar(car);
 
         Assert.assertTrue(parkingLotA.hasCar(car.getTicket()));
-        Assert.assertFalse(parkingLotB.hasCar(car.getTicket()));
-        Assert.assertFalse(parkingLotC.hasCar(car.getTicket()));
+        Assert.assertTrue(!parkingLotB.hasCar(car.getTicket()));
+        Assert.assertTrue(!parkingLotC.hasCar(car.getTicket()));
     }
 
     @Test
@@ -77,15 +78,15 @@ public class ParkingLotTest {
         parkingLotB = new ParkingLot(5);
         parkingLotC = new ParkingLot(5);
 
-        manager.getParkingLots().add(parkingLotA);
-        manager.getParkingLots().add(parkingLotB);
+        parkingBoy.getParkingLots().add(parkingLotA);
+        parkingBoy.getParkingLots().add(parkingLotB);
 
         Car car = new Car();
-        manager.parkCar(car);
+        parkingBoy.parkCar(car);
 
-        Assert.assertFalse(parkingLotA.hasCar(car.getTicket()));
+        Assert.assertTrue(!parkingLotA.hasCar(car.getTicket()));
         Assert.assertTrue(parkingLotB.hasCar(car.getTicket()));
-        Assert.assertFalse(parkingLotC.hasCar(car.getTicket()));
+        Assert.assertTrue(!parkingLotC.hasCar(car.getTicket()));
     }
 
     @Test(expected = FullParkingException.class)
@@ -93,55 +94,63 @@ public class ParkingLotTest {
         parkingLotA = new ParkingLot(0);
         parkingLotB = new ParkingLot(0);
 
-        manager.getParkingLots().add(parkingLotA);
-        manager.getParkingLots().add(parkingLotB);
+        parkingBoy.getParkingLots().add(parkingLotA);
+        parkingBoy.getParkingLots().add(parkingLotB);
 
         Car car = new Car();
-        manager.parkCar(car);
+        parkingBoy.parkCar(car);
     }
 
     @Test
     public void manager_releases_car() throws CarNotFoundException, FullParkingException{
         parkingLotA = new ParkingLot(5);
-        manager.getParkingLots().add(parkingLotA);
+        parkingLotB = new ParkingLot(5);
+
+        parkingBoy.getParkingLots().add(parkingLotA);
+        parkingBoy.getParkingLots().add(parkingLotA);
 
         Car car = new Car();
-        manager.parkCar(car);
+        parkingBoy.parkCar(car);
 
-        Assert.assertEquals(car, manager.releaseCar(car.getTicket()));
+        Assert.assertEquals(car, parkingBoy.releaseCar(car.getTicket()));
     }
 
     @Test
     public void manager_parks_multiple_cars_and_parking_lots_available() throws FullParkingException{
         List<Car> cars = new ArrayList<>();
         cars.add(new Car());
-        cars.add(new Car());
+        cars.add( new Car());
         cars.add(new Car());
 
         parkingLotA = new ParkingLot(2);
         parkingLotB = new ParkingLot(2);
 
-        manager.getParkingLots().add(parkingLotA);
-        manager.getParkingLots().add(parkingLotB);
+        parkingBoy.getParkingLots().add(parkingLotA);
+        parkingBoy.getParkingLots().add(parkingLotB);
 
-        manager.parkCars(cars);
+        parkingBoy.parkCars(cars);
     }
 
     @Test(expected = FullParkingException.class)
     public void manager_parks_multiple_cars_and_not_enough_space() throws FullParkingException{
 
         List<Car> cars = new ArrayList<>();
-        cars.add(new Car());
-        cars.add(new Car());
-        cars.add(new Car());
+
+        Car carA = new Car();
+        Car carB = new Car();
+        Car carC = new Car();
+
+        cars.add(carA);
+        cars.add(carB);
+        cars.add(carC);
 
         parkingLotA = new ParkingLot(2);
         parkingLotB = new ParkingLot(0);
 
-        manager.getParkingLots().add(parkingLotA);
-        manager.getParkingLots().add(parkingLotB);
+        parkingBoy.getParkingLots().add(parkingLotA);
+        parkingBoy.getParkingLots().add(parkingLotB);
 
-        manager.parkCars(cars);
+        parkingBoy.parkCars(cars);
 
     }
 
@@ -155,11 +164,11 @@ public class ParkingLotTest {
         parkingLotA = new ParkingLot(2);
         parkingLotB = new ParkingLot(2);
 
-        manager.getParkingLots().add(parkingLotA);
-        manager.getParkingLots().add(parkingLotB);
+        parkingBoy.getParkingLots().add(parkingLotA);
+        parkingBoy.getParkingLots().add(parkingLotB);
 
-        manager.parkCars(cars);
-        manager.releaseCars(cars);
+        parkingBoy.parkCars(cars);
+        parkingBoy.releaseCars(cars);
 
         Assert.assertEquals(0, parkingLotA.getCars().size());
         Assert.assertEquals(0, parkingLotB.getCars().size());
@@ -167,6 +176,63 @@ public class ParkingLotTest {
 
     @Test(expected = CarNotFoundException.class)
     public void manager_tries_to_release_unparked_car() throws CarNotFoundException{
-        manager.releaseCar(new Ticket());
+        parkingBoy.releaseCar(new Ticket());
+    }
+
+    @Test
+    public void given_highest_parking_slot_when_parks_car_reduce_parking_slot() throws Exception {
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+
+        parkingLotA = new ParkingLot(1);
+        parkingLotB = new ParkingLot(3);
+
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+
+        smartParkingBoy.getParkingLots().add(parkingLotA);
+        smartParkingBoy.getParkingLots().add(parkingLotB);
+
+        smartParkingBoy.parkCars(cars);
+
+        Assert.assertEquals(3, parkingLotB.getCars().size());
+    }
+
+    @Test
+    public void given_parking_slot_with_same_slot_count_should_park_car_in_first() throws Exception {
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+
+        parkingLotA = new ParkingLot(3);
+        parkingLotB = new ParkingLot(3);
+
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+
+        smartParkingBoy.getParkingLots().add(parkingLotA);
+        smartParkingBoy.getParkingLots().add(parkingLotB);
+
+        smartParkingBoy.parkCars(cars);
+        Assert.assertEquals(3, parkingLotA.getCars().size());
+    }
+
+    @Test(expected = FullParkingException.class)
+    public void given_parking_lot_with_no_available_slot_should_return_exception() throws Exception {
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+
+        parkingLotA = new ParkingLot(0);
+        parkingLotB = new ParkingLot(0);
+
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+
+        smartParkingBoy.getParkingLots().add(parkingLotA);
+        smartParkingBoy.getParkingLots().add(parkingLotB);
+
+        smartParkingBoy.parkCars(cars);
     }
 }
