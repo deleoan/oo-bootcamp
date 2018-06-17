@@ -5,6 +5,7 @@ import org.exceptions.FullParkingException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class ParkingBoy {
     private final String parkingBoyType;
@@ -15,19 +16,24 @@ class ParkingBoy {
         this.parkingBoyType = parkingBoyType;
     }
 
-    private ParkingLot getParkingLot(String parkingBoyType) {
+    private ParkingLot getParkingLot() {
         ParkingLotChecker parkingLotChecker = null;
-        if(parkingBoyType.equals("NormalParkingBoy")) {
-            parkingLotChecker = new FirstParkingLotChecker();
-        } else if (parkingBoyType.equals("SmartParkingBoy")) {
-            parkingLotChecker = new HighestParkingLotChecker();
+        switch (parkingBoyType) {
+            case "NormalParkingBoy":
+                parkingLotChecker = new FirstParkingLotChecker();
+                break;
+            case "SmartParkingBoy":
+                parkingLotChecker = new HighestParkingLotChecker();
+                break;
+            case "SuperParkingBoy":
+                parkingLotChecker = new MostAvailableSpaceRateParkingLotChecker();
+                break;
         }
-        assert parkingLotChecker != null;
-        return parkingLotChecker.getAvailableParkingLot(parkingLots);
+        return Objects.requireNonNull(parkingLotChecker).getAvailableParkingLot(parkingLots);
     }
 
     Ticket parkCar(Car car) throws FullParkingException {
-        ParkingLot parkingLot = getParkingLot(parkingBoyType);
+        ParkingLot parkingLot = getParkingLot();
         if (parkingLot != null) {
             return parkingLot.checkSlotAndParkCar(car);
         }

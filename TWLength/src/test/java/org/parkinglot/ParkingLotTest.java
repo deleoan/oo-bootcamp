@@ -46,6 +46,7 @@ public class ParkingLotTest {
         Assert.assertNull(parkingLot.releaseCar(ticket));
     }
 
+    //Requirement 2
     @Test
     public void given_parking_lot_A_not_full_when_park_car_should_return_ticket() throws FullParkingException{
         List<ParkingLot> parkingLots = new ArrayList<>();
@@ -166,7 +167,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void given_parking_slot_with_same_slot_count_should_park_car_in_first() throws Exception {
+    public void given_parking_lot_with_same_lot_count_should_park_car_in_first() throws Exception {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(5));
         parkingLots.add(new ParkingLot(5));
@@ -179,6 +180,9 @@ public class ParkingLotTest {
         Assert.assertEquals(1, parkingLots.get(0).parkedCars.size());
     }
 
-    
+    //Requirement 3
+    @Test
+    public void given_() {
 
+    }
 }
