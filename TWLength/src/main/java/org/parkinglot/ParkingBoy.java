@@ -7,54 +7,63 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ParkingBoy {
+    private final String parkingBoyType;
+    private List<ParkingLot> parkingLots;
 
-    private List<ParkingLot> parkingLots = new ArrayList<>();
-
-    List<ParkingLot> getParkingLots() {
-        return parkingLots;
+    ParkingBoy(List<ParkingLot> parkingLots, String parkingBoyType) {
+        this.parkingLots = parkingLots;
+        this.parkingBoyType = parkingBoyType;
     }
 
-    void parkCars(List<Car> cars) throws FullParkingException {
-        for(Car car : cars){
-            parkCar(car);
+    private ParkingLot getParkingLot(String parkingBoyType) {
+        ParkingLotChecker parkingLotChecker = null;
+        if(parkingBoyType.equals("NormalParkingBoy")) {
+            parkingLotChecker = new FirstParkingLotChecker();
+        } else if (parkingBoyType.equals("SmartParkingBoy")) {
+            parkingLotChecker = new HighestParkingLotChecker();
         }
+        assert parkingLotChecker != null;
+        return parkingLotChecker.getAvailableParkingLot(parkingLots);
     }
 
-    void parkCar(Car car) throws FullParkingException{
-        if(!isAllParkingLotsFull()){
-            for(ParkingLot parkingLot : getParkingLots()){
-                if(parkingLot.isFull()){
-                    continue;
-                }
-                parkingLot.checkSlotAndParkCar(car);
-                break;
-            }
-        }else{
-            throw new FullParkingException();
+    Ticket parkCar(Car car) throws FullParkingException {
+        ParkingLot parkingLot = getParkingLot(parkingBoyType);
+        if (parkingLot != null) {
+            return parkingLot.checkSlotAndParkCar(car);
         }
+        throw new FullParkingException();
     }
 
-    void releaseCars(List<Car> cars) throws CarNotFoundException {
-        for(Car car : cars){
-            releaseCar(car.getTicket());
-        }
-    }
-
-    Car releaseCar(Ticket ticket) throws CarNotFoundException{
-        for(ParkingLot parkingLot : getParkingLots()){
-            if(parkingLot.hasCar(ticket)){
+    Car releaseCar(Ticket ticket) throws CarNotFoundException {
+        for(ParkingLot parkingLot : parkingLots){
+            if (parkingLot.parkedCars.get(ticket) != null) {
                 return parkingLot.releaseCar(ticket);
             }
         }
         throw new CarNotFoundException();
     }
 
-    private boolean isAllParkingLotsFull(){
-        for(ParkingLot parkingLot : getParkingLots()){
-            if(!parkingLot.isFull()){
-                return false;
-            }
+    List<Ticket> parkMultipleCars(List<Car> cars) throws FullParkingException {
+        List<Ticket> tickets = new ArrayList<>();
+        for (Car car : cars) {
+            tickets.add(parkCar(car));
         }
-        return true;
+        if (tickets.size() > 0) {
+            return tickets;
+        } else {
+            throw new FullParkingException();
+        }
+    }
+
+    List<Car> releaseMultipleCars(List<Ticket> tickets) throws CarNotFoundException {
+        List<Car> returnedCars = new ArrayList<>();
+        for (Ticket ticket : tickets) {
+            returnedCars.add(releaseCar(ticket));
+        }
+        if(returnedCars.size() > 0) {
+            return returnedCars;
+        } else {
+            throw new CarNotFoundException();
+        }
     }
 }

@@ -3,61 +3,44 @@ package org.parkinglot;
 import org.exceptions.CarNotFoundException;
 import org.exceptions.FullParkingException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 class ParkingLot {
-    int maximumSlots;
+    private int maximumSlots;
+    HashMap<Ticket, Car> parkedCars;
 
-    List<Car> cars = new ArrayList<>();
-
-    public ParkingLot(int maximumSlots){
+    ParkingLot(int maximumSlots){
         this.maximumSlots = maximumSlots;
-    }
-
-    public List<Car> getCars() {
-        return cars;
+        this.parkedCars = new HashMap<>();
     }
 
     Ticket checkSlotAndParkCar(Car car) throws FullParkingException {
-        if (!isFull() && car != null) {
-            parkCar(car);
-            return car.getTicket();
+        if (isFull() && car != null) {
+            Ticket ticket = new Ticket();
+            parkCar(car, ticket);
+            return ticket;
         }
         throw new FullParkingException();
     }
 
-    private void parkCar(Car car) {
-        Ticket ticket = new Ticket();
-        car.setTicket(ticket);
-        getCars().add(car);
-        this.maximumSlots-=1;
+    private void parkCar(Car car, Ticket ticket) {
+        parkedCars.put(ticket, car);
+        this.maximumSlots--;
     }
 
     Car releaseCar(Ticket ticket) throws CarNotFoundException {
-        for(Car car: this.cars){
-            if(car.getTicket().equals(ticket)){
-                this.maximumSlots+=1;
-                cars.remove(car);
-                return car;
-            }
+        if(parkedCars.containsKey(ticket)) {
+            this.maximumSlots++;
+            return parkedCars.remove(ticket);
         }
         throw new CarNotFoundException();
     }
 
-    public boolean hasCar(Ticket ticket){
-        for(Car parkedCar : getCars()){
-            if(parkedCar.getTicket().equals(ticket)){
-                return true;
-            }
-        }
-        return false;
+    boolean isFull() {
+        return this.maximumSlots != 0;
     }
 
-    public boolean isFull() {
-        if(this.maximumSlots==0){
-            return true;
-        }
-        return false;
+    int getMaximumAvailableSlots() {
+        return this.maximumSlots;
     }
 }
