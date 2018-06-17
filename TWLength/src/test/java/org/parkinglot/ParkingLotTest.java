@@ -153,10 +153,10 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void given_highest_parking_slot_when_park_car_return_ticket() throws Exception {
+    public void given_highest_parking_lot_when_park_car_return_ticket() throws Exception {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
-        parkingLots.add(new ParkingLot(5));
+        parkingLots.add(new ParkingLot(2));
 
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, "SmartParkingBoy");
         Car car = new Car();
@@ -179,6 +179,26 @@ public class ParkingLotTest {
         Assert.assertNotNull(ticket);
         Assert.assertEquals(1, parkingLots.get(0).parkedCars.size());
     }
+
+    @Test
+    public void given_highest_parking_lot_when_park_multiple_cars_return_ticket() throws Exception {
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        parkingLots.add(new ParkingLot(2));
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, "SmartParkingBoy");
+
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+
+        List<Ticket> tickets = parkingBoy.parkMultipleCars(cars);
+
+//        Assert.assertNotNull(ticket);
+        Assert.assertEquals(1, parkingLots.get(1).parkedCars.size());
+    }
+
 
     //Requirement 3
     @Test

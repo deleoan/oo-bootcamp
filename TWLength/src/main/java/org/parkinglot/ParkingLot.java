@@ -7,10 +7,11 @@ import java.util.HashMap;
 
 class ParkingLot {
     private int maximumSlots;
+    private int availableSpace;
     HashMap<Ticket, Car> parkedCars;
-
     ParkingLot(int maximumSlots){
         this.maximumSlots = maximumSlots;
+        this.availableSpace = maximumSlots;
         this.parkedCars = new HashMap<>();
     }
 
@@ -25,22 +26,26 @@ class ParkingLot {
 
     private void parkCar(Car car, Ticket ticket) {
         parkedCars.put(ticket, car);
-        this.maximumSlots--;
+        this.availableSpace--;
     }
 
     Car releaseCar(Ticket ticket) throws CarNotFoundException {
         if(parkedCars.containsKey(ticket)) {
-            this.maximumSlots++;
+            this.availableSpace++;
             return parkedCars.remove(ticket);
         }
         throw new CarNotFoundException();
     }
 
     boolean isFull() {
-        return this.maximumSlots != 0;
+        return this.availableSpace != 0;
     }
 
     int getMaximumAvailableSlots() {
         return this.maximumSlots;
+    }
+
+    int getAvailableSpace() {
+        return this.availableSpace;
     }
 }
