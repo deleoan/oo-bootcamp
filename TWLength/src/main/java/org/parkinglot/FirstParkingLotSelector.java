@@ -2,7 +2,7 @@ package org.parkinglot;
 
 import java.util.List;
 
-class FirstParkingLotChecker implements ParkingLotChecker{
+public class FirstParkingLotSelector implements ParkingLotSelector {
 
     @Override
     public ParkingLot getAvailableParkingLot(List<ParkingLot> parkingLots) {

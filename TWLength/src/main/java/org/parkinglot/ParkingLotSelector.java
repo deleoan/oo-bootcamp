@@ -2,6 +2,6 @@ package org.parkinglot;
 
 import java.util.List;
 
-public interface ParkingLotChecker {
+public interface ParkingLotSelector {
     ParkingLot getAvailableParkingLot(List<ParkingLot> parkingLots);
 }

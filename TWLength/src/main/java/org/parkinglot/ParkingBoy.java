@@ -5,38 +5,18 @@ import org.exceptions.FullParkingException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 class ParkingBoy {
-    private final String parkingBoyType;
     private List<ParkingLot> parkingLots;
+    private ParkingLotSelector parkingLotSelector;
 
     ParkingBoy(List<ParkingLot> parkingLots, String parkingBoyType) {
         this.parkingLots = parkingLots;
-        this.parkingBoyType = parkingBoyType;
-    }
-
-    private ParkingLot getParkingLot() {
-        ParkingLotChecker parkingLotChecker = null;
-        switch (parkingBoyType) {
-            case "NormalParkingBoy":
-                parkingLotChecker = new FirstParkingLotChecker();
-
-                break;
-            case "SmartParkingBoy":
-                parkingLotChecker = new HighestParkingLotChecker();
-
-                break;
-            case "SuperParkingBoy":
-                parkingLotChecker = new MostAvailableSpaceRateParkingLotChecker();
-
-                break;
-        }
-        return Objects.requireNonNull(parkingLotChecker).getAvailableParkingLot(parkingLots);
+        this.parkingLotSelector = ParkingLotSelectorFactory.create(parkingBoyType);
     }
 
     Ticket parkCar(Car car) throws FullParkingException {
-        ParkingLot parkingLot = getParkingLot();
+        ParkingLot parkingLot = parkingLotSelector.getAvailableParkingLot(parkingLots);
         if (parkingLot != null) {
             return parkingLot.checkSlotAndParkCar(car);
         }
@@ -44,7 +24,7 @@ class ParkingBoy {
     }
 
     Car releaseCar(Ticket ticket) throws CarNotFoundException {
-        for(ParkingLot parkingLot : parkingLots){
+        for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.parkedCars.get(ticket) != null) {
                 return parkingLot.releaseCar(ticket);
             }
@@ -69,7 +49,7 @@ class ParkingBoy {
         for (Ticket ticket : tickets) {
             returnedCars.add(releaseCar(ticket));
         }
-        if(returnedCars.size() > 0) {
+        if (returnedCars.size() > 0) {
             return returnedCars;
         } else {
             throw new CarNotFoundException();

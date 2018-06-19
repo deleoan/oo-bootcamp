@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HighestParkingLotChecker implements ParkingLotChecker{
+public class HighestParkingLotSelector implements ParkingLotSelector {
 
     @Override
     public ParkingLot getAvailableParkingLot(List<ParkingLot> parkingLots) {
