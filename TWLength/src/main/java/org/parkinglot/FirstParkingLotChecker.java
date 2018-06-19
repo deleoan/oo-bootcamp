@@ -7,7 +7,7 @@ class FirstParkingLotChecker implements ParkingLotChecker{
     @Override
     public ParkingLot getAvailableParkingLot(List<ParkingLot> parkingLots) {
         for(ParkingLot parkingLot : parkingLots){
-            if(parkingLot.isFull()){
+            if(parkingLot.isNotFull()){
                 return parkingLot;
             }
         }

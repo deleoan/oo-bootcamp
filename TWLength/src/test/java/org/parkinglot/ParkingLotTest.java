@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ParkingLotTest {
 
+//    Requirement1
     @Test
     public void park_car_to_available_slot() throws FullParkingException {
         Car car = new Car();
@@ -152,6 +153,7 @@ public class ParkingLotTest {
 
     }
 
+    //Requirement 3
     @Test
     public void given_highest_parking_lot_when_park_car_return_ticket() throws Exception {
         List<ParkingLot> parkingLots = new ArrayList<>();
@@ -194,15 +196,64 @@ public class ParkingLotTest {
         cars.add(new Car());
 
         List<Ticket> tickets = parkingBoy.parkMultipleCars(cars);
+        Assert.assertNotNull(tickets);
+        Assert.assertEquals(1, parkingLots.get(0).parkedCars.size());
+        Assert.assertEquals(2, parkingLots.get(1).parkedCars.size());
+    }
 
-//        Assert.assertNotNull(ticket);
+    //Requirement 4
+    @Test
+    public void given_parking_lots_when_park_car_should_park_in_highest_rate_lot_and_return_ticket() throws Exception {
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(2));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, "SuperParkingBoy");
+        parkingBoy.parkCar(new Car());
+
+        parkingLots.add(new ParkingLot(3));
+        Ticket ticket = parkingBoy.parkCar(new Car());
+
+        Assert.assertNotNull(ticket);
         Assert.assertEquals(1, parkingLots.get(1).parkedCars.size());
     }
 
-
-    //Requirement 3
     @Test
-    public void given_() {
+    public void given_parking_lots_when_park_multiple_cars_should_park_in_highest_rate_lot_and_return_ticket() throws Exception {
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(3));
+        parkingLots.add(new ParkingLot(4));
 
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, "SuperParkingBoy");
+
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+
+        List<Ticket> tickets = parkingBoy.parkMultipleCars(cars);
+
+        Assert.assertNotNull(tickets);
+        Assert.assertEquals(1, parkingLots.get(0).parkedCars.size());
+        Assert.assertEquals(2, parkingLots.get(1).parkedCars.size());
+    }
+
+    @Test
+    public void given_parked_cars_when_pick_up_cars_should_release_cars() throws Exception {
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(3));
+        parkingLots.add(new ParkingLot(4));
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, "SuperParkingBoy");
+
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+
+        List<Ticket> tickets = parkingBoy.parkMultipleCars(cars);
+        List<Car> releasedCars = parkingBoy.releaseMultipleCars(tickets);
+
+        Assert.assertEquals(3, releasedCars.size());
+        Assert.assertEquals(0, parkingLots.get(0).parkedCars.size());
+        Assert.assertEquals(0, parkingLots.get(1).parkedCars.size());
     }
 }

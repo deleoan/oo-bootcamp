@@ -16,7 +16,7 @@ class ParkingLot {
     }
 
     Ticket checkSlotAndParkCar(Car car) throws FullParkingException {
-        if (isFull() && car != null) {
+        if (isNotFull() && car != null) {
             Ticket ticket = new Ticket();
             parkCar(car, ticket);
             return ticket;
@@ -37,7 +37,7 @@ class ParkingLot {
         throw new CarNotFoundException();
     }
 
-    boolean isFull() {
+    boolean isNotFull() {
         return this.availableSpace != 0;
     }
 

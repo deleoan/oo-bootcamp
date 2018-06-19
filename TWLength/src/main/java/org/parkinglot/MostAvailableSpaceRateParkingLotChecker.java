@@ -10,8 +10,6 @@ public class MostAvailableSpaceRateParkingLotChecker implements ParkingLotChecke
     }
 
     private float getParkingLotRate(ParkingLot parkingLot) {
-//        availableSpace/capacity
-//        return (float) parkingLot.getMaximumAvailableSlots()/parkingLot.parkedCars.size();
-        return Float.parseFloat(null);
+        return (float) parkingLot.getAvailableSpace()/(float) parkingLot.getMaximumAvailableSlots() * 100;
     }
 }

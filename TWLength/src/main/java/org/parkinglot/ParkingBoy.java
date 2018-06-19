@@ -21,12 +21,15 @@ class ParkingBoy {
         switch (parkingBoyType) {
             case "NormalParkingBoy":
                 parkingLotChecker = new FirstParkingLotChecker();
+
                 break;
             case "SmartParkingBoy":
                 parkingLotChecker = new HighestParkingLotChecker();
+
                 break;
             case "SuperParkingBoy":
                 parkingLotChecker = new MostAvailableSpaceRateParkingLotChecker();
+
                 break;
         }
         return Objects.requireNonNull(parkingLotChecker).getAvailableParkingLot(parkingLots);

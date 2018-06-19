@@ -2,19 +2,16 @@ package org.parkinglot;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HighestParkingLotChecker implements ParkingLotChecker{
 
     @Override
     public ParkingLot getAvailableParkingLot(List<ParkingLot> parkingLots) {
-        ParkingLot parkingLot = getHighestCapacityParkingLot(parkingLots);
-        if (parkingLot.getAvailableSpace() != 0) {
-            return parkingLot;
-        }
-        return getHighestCapacityParkingLot(parkingLots);
-    }
+        List<ParkingLot> notFullParkingLots = parkingLots.stream()
+                .filter(ParkingLot::isNotFull)
+                .collect(Collectors.toList());
 
-    private ParkingLot getHighestCapacityParkingLot(List<ParkingLot> parkingLots) {
-        return parkingLots.stream().max(Comparator.comparing(ParkingLot::getMaximumAvailableSlots)).get();
+        return notFullParkingLots.stream().max(Comparator.comparing(ParkingLot::getMaximumAvailableSlots)).get();
     }
 }
