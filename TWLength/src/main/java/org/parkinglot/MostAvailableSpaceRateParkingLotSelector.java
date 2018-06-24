@@ -6,10 +6,7 @@ import java.util.List;
 public class MostAvailableSpaceRateParkingLotSelector implements ParkingLotSelector {
     @Override
     public ParkingLot getAvailableParkingLot(List<ParkingLot> parkingLots) {
-        return parkingLots.stream().max(Comparator.comparing(this::getParkingLotRate)).get();
+        return parkingLots.stream().max(Comparator.comparing(ParkingLot::getParkingLotRate)).get();
     }
 
-    private float getParkingLotRate(ParkingLot parkingLot) {
-        return (float) parkingLot.getAvailableSpace()/(float) parkingLot.getMaximumAvailableSlots() * 100;
-    }
 }

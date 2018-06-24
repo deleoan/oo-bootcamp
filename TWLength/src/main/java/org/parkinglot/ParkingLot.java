@@ -45,7 +45,11 @@ class ParkingLot {
         return this.maximumSlots;
     }
 
-    int getAvailableSpace() {
+    private int getAvailableSpace() {
         return this.availableSpace;
+    }
+
+    float getParkingLotRate() {
+        return (float) getAvailableSpace()/(float) getMaximumAvailableSlots() * 100;
     }
 }

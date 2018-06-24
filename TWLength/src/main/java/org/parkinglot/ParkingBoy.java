@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ParkingBoy {
-    private List<ParkingLot> parkingLots;
+    protected List<ParkingLot> parkingLots;
     private ParkingLotSelector parkingLotSelector;
 
     ParkingBoy(List<ParkingLot> parkingLots, String parkingBoyType) {
