@@ -276,28 +276,35 @@ public class ParkingLotTest {
         parkingBoys.add(new ParkingBoy(parkingLots1, NORMAL_PARKING_BOY));
         parkingBoys.add(new ParkingBoy(parkingLots2, SUPER_PARKING_BOY));
 
-        ParkingManager parkingManager = new ParkingManager(parkingBoys, null);
+        List<ParkingLot> managerParkingLots = new ArrayList<>();
+        managerParkingLots.add(new ParkingLot(1));
+        managerParkingLots.add(new ParkingLot(0));
+
+
+        ParkingManager parkingManager = new ParkingManager(managerParkingLots, NORMAL_PARKING_BOY);
+        parkingManager.hireParkingBoys(parkingBoys);
         Ticket parkingTicket = parkingManager.parkCar(new Car());
         Assert.assertNotNull(parkingTicket);
     }
 
     @Test
     public void given_parking_manger_without_parking_boy_when_park_car_then_return_parking_ticket() throws Exception {
-        List<ParkingBoy> parkingBoys = new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot(3);
+        List<ParkingLot> managerParkingLots = new ArrayList<>();
+        managerParkingLots.add(new ParkingLot(1));
+        managerParkingLots.add(new ParkingLot(0));
 
-        ParkingManager parkingManager = new ParkingManager(parkingBoys, parkingLot);
+        ParkingManager parkingManager = new ParkingManager(managerParkingLots, NORMAL_PARKING_BOY);
         Ticket parkingTicket = parkingManager.parkCar(new Car());
         Assert.assertNotNull(parkingTicket);
     }
 
     @Test(expected = FullParkingException.class)
     public void given_parking_lot_with_no_available_slot_when_parking_manager_park_car_then_throw_exception() throws Exception {
-        List<ParkingBoy> parkingBoys = new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot(0);
+        List<ParkingLot> managerParkingLots = new ArrayList<>();
+        managerParkingLots.add(new ParkingLot(0));
+        managerParkingLots.add(new ParkingLot(0));
 
-        ParkingManager parkingManager = new ParkingManager(parkingBoys, parkingLot);
-        Ticket parkingTicket = parkingManager.parkCar(new Car());
-        Assert.assertNull(parkingTicket);
+        ParkingManager parkingManager = new ParkingManager(managerParkingLots, NORMAL_PARKING_BOY);
+        parkingManager.parkCar(new Car());
     }
 }
