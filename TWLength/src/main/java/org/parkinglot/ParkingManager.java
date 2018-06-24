@@ -4,28 +4,31 @@ import org.exceptions.FullParkingException;
 
 import java.util.List;
 
-public class ParkingManager extends ParkingBoy {
-    public static final String SUPER_PARKING_BOY = "SuperParkingBoy";
+class ParkingManager{
     private List<ParkingBoy> parkingBoys;
+    private ParkingLot parkingLot;
 
-    ParkingManager(List<ParkingLot> parkingLots, String parkingBoyType) {
-        super(parkingLots, parkingBoyType);
 
+    ParkingManager(List<ParkingBoy> parkingBoys, ParkingLot parkingLot) {
+        this.parkingBoys = parkingBoys;
+        this.parkingLot = parkingLot;
     }
 
-//    public ParkingManager(List<ParkingLot> parkingLots, List<ParkingBoy> parkingBoys) {
-//        this.parkingLots = parkingLots;
-//        this.parkingBoys = parkingBoys;
-//    }
-
-    @Override
-    public Ticket parkCar(Car car) throws FullParkingException {
+    Ticket parkCar(Car car) throws FullParkingException {
+        Ticket parkingTicket;
         if (parkingBoys.isEmpty()) {
-            ParkingBoy parkingBoy = new ParkingBoy(parkingLots, SUPER_PARKING_BOY);
-            return parkingBoy.parkCar(car);
+            parkingTicket = parkingLot.checkSlotAndParkCar(car);
+            if (parkingTicket != null) return parkingTicket;
+            throw new FullParkingException();
         } else {
             for (ParkingBoy parkingBoy : parkingBoys) {
-                return parkingBoy.parkCar(car);
+                try {
+                    parkingTicket = parkingBoy.parkCar(car);
+                } catch (FullParkingException e) {
+                    e.printStackTrace();
+                    continue;
+                }
+                if (parkingTicket != null) return parkingTicket;
             }
         }
         return null;

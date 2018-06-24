@@ -264,40 +264,40 @@ public class ParkingLotTest {
     //Requirement 5
     @Test
     public void given_parking_manger_with_normal_parking_boy_when_park_car_then_return_parking_ticket() throws Exception {
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(new ParkingLot(3));
-        parkingLots.add(new ParkingLot(4));
+        List<ParkingLot> parkingLots1 = new ArrayList<>();
+        parkingLots1.add(new ParkingLot(0));
+        parkingLots1.add(new ParkingLot(0));
+
+        List<ParkingLot> parkingLots2 = new ArrayList<>();
+        parkingLots2.add(new ParkingLot(1));
+        parkingLots2.add(new ParkingLot(0));
 
         List<ParkingBoy> parkingBoys = new ArrayList<>();
-        parkingBoys.add(new ParkingBoy(parkingLots, NORMAL_PARKING_BOY));
+        parkingBoys.add(new ParkingBoy(parkingLots1, NORMAL_PARKING_BOY));
+        parkingBoys.add(new ParkingBoy(parkingLots2, SUPER_PARKING_BOY));
 
-        ParkingManager parkingManager = new ParkingManager(parkingLots, parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys, null);
         Ticket parkingTicket = parkingManager.parkCar(new Car());
         Assert.assertNotNull(parkingTicket);
     }
 
     @Test
     public void given_parking_manger_without_parking_boy_when_park_car_then_return_parking_ticket() throws Exception {
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(new ParkingLot(3));
-        parkingLots.add(new ParkingLot(4));
-
         List<ParkingBoy> parkingBoys = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot(3);
 
-        ParkingManager parkingManager = new ParkingManager(parkingLots, parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys, parkingLot);
         Ticket parkingTicket = parkingManager.parkCar(new Car());
         Assert.assertNotNull(parkingTicket);
     }
 
     @Test(expected = FullParkingException.class)
     public void given_parking_lot_with_no_available_slot_when_parking_manager_park_car_then_throw_exception() throws Exception {
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(new ParkingLot(0));
-        parkingLots.add(new ParkingLot(0));
-
         List<ParkingBoy> parkingBoys = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot(0);
 
-        ParkingManager parkingManager = new ParkingManager(parkingLots, parkingBoys);
-        parkingManager.parkCar(new Car());
+        ParkingManager parkingManager = new ParkingManager(parkingBoys, parkingLot);
+        Ticket parkingTicket = parkingManager.parkCar(new Car());
+        Assert.assertNull(parkingTicket);
     }
 }

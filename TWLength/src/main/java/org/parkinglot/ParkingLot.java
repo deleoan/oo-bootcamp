@@ -50,6 +50,10 @@ class ParkingLot {
     }
 
     float getParkingLotRate() {
-        return (float) getAvailableSpace()/(float) getMaximumAvailableSlots() * 100;
+        float defaultRate = (float) 0.0;
+        if (getAvailableSpace() != 0) {
+            return (float) getAvailableSpace()/(float) getMaximumAvailableSlots() * 100;
+        }
+        return defaultRate;
     }
 }
